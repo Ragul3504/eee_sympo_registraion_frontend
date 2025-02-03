@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./App.css";
 import { Mail, Smartphone, User } from "lucide-react";
 
-const eventPrice = 300; // Fixed price for all tech events
+const eventPrice = 300; // Fixed price for all events
 
 function App() {
   const [formData, setFormData] = useState({
@@ -12,7 +12,7 @@ function App() {
     year: "",
     mobile: "",
     email: "",
-    totalAmount: eventPrice, // Always ₹300
+    totalAmount: eventPrice,
   });
 
   const [qrCodeURL, setQRCodeURL] = useState(""); 
@@ -30,7 +30,7 @@ function App() {
     e.preventDefault();
 
     if (!formData.name || !formData.college || !formData.department || !formData.year || !formData.mobile || !formData.email) {
-      alert("Please fill all fields before proceeding.");
+      alert("Please fill all fields.");
       return;
     }
 
@@ -60,6 +60,7 @@ function App() {
   return (
     <div className="container">
       <h1>Electryonz'25 Technical Symposium Registration</h1>
+      <p className="caption">You can participate in all the technical events.</p>
       <form className="registration-form" onSubmit={handleSubmit}>
         <div className="form-group">
           <label>Name: <User className="icon" /></label>
@@ -93,7 +94,7 @@ function App() {
         </div>
 
         <div className="form-group">
-          <h3>Technical Events: ₹{eventPrice} (Flat Fee)</h3>
+          <h3>Total Amount: ₹{eventPrice}</h3>
         </div>
 
         <button type="submit" className="btn" disabled={loading}>
