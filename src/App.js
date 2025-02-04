@@ -36,12 +36,12 @@ function App() {
 
     try {
       setLoading(true);
-      const response = await fetch("http://localhost:5000/api/register", {
+      const response = await fetch("http://electryonz25.vercel.app/api/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
-
+      console.log(response);
       if (response.ok) {
         const data = await response.json();
         setQRCodeURL(data.qrCodeURL);
@@ -59,7 +59,8 @@ function App() {
 
   return (
     <div className="container">
-      <h1>Electryonz'25 Technical Symposium Registration</h1>
+      <h1>Electryonz'25 </h1>
+      <h1>Technical Symposium Registration</h1>
       <p className="caption">You can participate in all the technical events.</p>
       <form className="registration-form" onSubmit={handleSubmit}>
         <div className="form-group">

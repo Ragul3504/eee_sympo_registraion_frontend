@@ -1,6 +1,6 @@
 /* Global Styles */
 body {
-  font-family: 'Arial', sans-serif;
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   background-image: url('./682670.jpg');
   background-size: cover;
   background-position: center;
@@ -13,17 +13,17 @@ body {
 }
 
 .container {
-  background: rgba(66, 63, 63, 0.9);
+  background: rgba(248, 246, 246, 0.9);
   padding: 30px;
   border-radius: 10px;
-  box-shadow: 0px 4px 10px rgba(239, 237, 237, 0.1);
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   max-width: 500px;
   width: 90%;
 }
 
 h1 {
   text-align: center;
-  color: #f7f6f6;
+  color: #000000;
   margin-bottom: 20px;
 }
 
@@ -74,7 +74,7 @@ input, select {
 }
 
 .events-list div:hover {
-  background: #ddd;
+  background: #c71111;
 }
 
 /* Button Styling */
