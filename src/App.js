@@ -2,23 +2,7 @@ import React, { useState } from "react";
 import "./App.css";
 import { Mail, Smartphone, User } from "lucide-react";
 
-const technicalEvents = [
-  { id: 1, name: "Paper Presentation", price: 200 },
-  { id: 2, name: "Project Expo", price: 300 },
-  { id: 3, name: "Technical Quiz", price: 150 },
-  { id: 4, name: "Tech Puzzles", price: 400 },
-  { id: 5, name: "Coding Wizard", price: 350 },
-  { id: 6, name: "Circuit Debugging", price: 250 },
-];
-
-const nonTechnicalEvents = [
-  { id: 7, name: "Chess Champions", price: 200 },
-  { id: 8, name: "Carrom ", price: 150 },
-  { id: 9, name: "IPL Auction", price: 300 },
-  { id: 10, name: "Free Fire", price: 200 },
-  { id: 11, name: "", price: 250 },
-  { id: 12, name: "Dance", price: 200 },
-];
+const eventPrice = 300; // Fixed price for all tech events
 
 function App() {
   const [formData, setFormData] = useState({
@@ -28,15 +12,11 @@ function App() {
     year: "",
     mobile: "",
     email: "",
-    selectedEvents: [],
-    totalAmount: 0,
+    totalAmount: eventPrice, // Always ₹300
   });
 
-  const [qrCodeURL, setQRCodeURL] = useState(""); // State to store QR code URL
+  const [qrCodeURL, setQRCodeURL] = useState(""); 
   const [loading, setLoading] = useState(false);
-
-  const eventFeeThreshold = 3; // Discount threshold
-  const discountRate = 0.1; // 10% discount
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -46,49 +26,11 @@ function App() {
     }));
   };
 
-  const handleEventSelection = (event) => {
-    const selectedEvent =
-      technicalEvents.concat(nonTechnicalEvents).find((ev) => ev.id === parseInt(event.target.value));
-    const isSelected = formData.selectedEvents.find((ev) => ev.id === selectedEvent.id);
-
-    if (isSelected) {
-      setFormData((prevData) => ({
-        ...prevData,
-        selectedEvents: prevData.selectedEvents.filter((ev) => ev.id !== selectedEvent.id),
-        totalAmount: prevData.totalAmount - selectedEvent.price,
-      }));
-    } else {
-      setFormData((prevData) => ({
-        ...prevData,
-        selectedEvents: [...prevData.selectedEvents, selectedEvent],
-        totalAmount: prevData.totalAmount + selectedEvent.price,
-      }));
-    }
-  };
-
-  const calculateDiscountedAmount = () => {
-    const baseAmount = formData.totalAmount;
-    if (formData.selectedEvents.length >= eventFeeThreshold) {
-      return baseAmount - baseAmount * discountRate;
-    }
-    return baseAmount;
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const finalAmount = calculateDiscountedAmount();
 
-    // Basic validation
-    if (
-      !formData.name ||
-      !formData.college ||
-      !formData.department ||
-      !formData.year ||
-      !formData.mobile ||
-      !formData.email ||
-      formData.selectedEvents.length === 0
-    ) {
-      alert("Please fill all the fields and select at least one event.");
+    if (!formData.name || !formData.college || !formData.department || !formData.year || !formData.mobile || !formData.email) {
+      alert("Please fill all fields before proceeding.");
       return;
     }
 
@@ -96,15 +38,13 @@ function App() {
       setLoading(true);
       const response = await fetch("http://localhost:5000/api/register", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ ...formData, totalAmount: finalAmount }),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
       });
 
       if (response.ok) {
         const data = await response.json();
-        setQRCodeURL(data.qrCodeURL); // Receive QR Code URL from the backend
+        setQRCodeURL(data.qrCodeURL);
         alert("Registration successful! Scan the QR code to complete the payment.");
       } else {
         alert("Registration failed. Please try again.");
@@ -119,13 +59,10 @@ function App() {
 
   return (
     <div className="container">
-      <h1>Electryonz'25 </h1>
-      <h1>Technical Symposium Registration</h1>
+      <h1>Electryonz'25 Technical Symposium Registration</h1>
       <form className="registration-form" onSubmit={handleSubmit}>
         <div className="form-group">
-          <label>
-            Name: <User className="icon" />
-          </label>
+          <label>Name: <User className="icon" /></label>
           <input type="text" name="name" value={formData.name} onChange={handleInputChange} required />
         </div>
         <div className="form-group">
@@ -147,60 +84,16 @@ function App() {
           </select>
         </div>
         <div className="form-group">
-          <label>
-            Mobile Number: <Smartphone className="icon" />
-          </label>
+          <label>Mobile Number: <Smartphone className="icon" /></label>
           <input type="tel" name="mobile" value={formData.mobile} onChange={handleInputChange} required />
         </div>
         <div className="form-group">
-          <label>
-            Email ID: <Mail className="icon" />
-          </label>
+          <label>Email ID: <Mail className="icon" /></label>
           <input type="email" name="email" value={formData.email} onChange={handleInputChange} required />
         </div>
 
         <div className="form-group">
-          <label>Technical Events:</label>
-          <div className="events-list">
-            {technicalEvents.map((event) => (
-              <div key={event.id}>
-                <input
-                  type="checkbox"
-                  id={`event-${event.id}`}
-                  value={event.id}
-                  onChange={handleEventSelection}
-                />
-                <label htmlFor={`event-${event.id}`}>
-                  {event.name} - ₹{event.price}
-                </label>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div className="form-group">
-          <label>Non-Technical Events:</label>
-          <div className="events-list">
-            {nonTechnicalEvents.map((event) => (
-              <div key={event.id}>
-                <input
-                  type="checkbox"
-                  id={`event-${event.id}`}
-                  value={event.id}
-                  onChange={handleEventSelection}
-                />
-                <label htmlFor={`event-${event.id}`}>
-                  {event.name} - ₹{event.price}
-                </label>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div className="form-group">
-          <h3>
-            Total Amount: ₹{formData.totalAmount} (After Discount: ₹{calculateDiscountedAmount()})
-          </h3>
+          <h3>Technical Events: ₹{eventPrice} (Flat Fee)</h3>
         </div>
 
         <button type="submit" className="btn" disabled={loading}>
@@ -214,6 +107,11 @@ function App() {
           <img src={qrCodeURL} alt="Google Pay QR Code" style={{ width: "200px", height: "200px" }} />
         </div>
       )}
+
+      <div className="offline-registration">
+        <h3>Non-Technical Events Registration is Available Offline</h3>
+        <p>Please visit the registration desk for non-technical event sign-ups.</p>
+      </div>
     </div>
   );
 }
