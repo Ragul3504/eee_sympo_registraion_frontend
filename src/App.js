@@ -99,7 +99,7 @@ function App() {
         </div>
 
         <button type="submit" className="btn" disabled={loading}>
-          {loading ? "Submitting..." : "Pay with Google Pay"}
+          {loading ? "Submitting..." : "Pay with UPI"}
         </button>
       </form>
 
