@@ -62,6 +62,10 @@ function App() {
       <h1>Electryonz'25 </h1>
       <h1>Technical Symposium Registration</h1>
       <p className="caption">You can participate in all the technical events.</p>
+      <div className="offline-registration">
+        <h3>Non-Technical Events Registration is Available Offline</h3>
+        <p>The Registration only for Technical events.The Payment for Non Tech change based on events.</p>
+      </div>
       <form className="registration-form" onSubmit={handleSubmit}>
         <div className="form-group">
           <label>Name: <User className="icon" /></label>
@@ -110,10 +114,7 @@ function App() {
         </div>
       )}
 
-      <div className="offline-registration">
-        <h3>Non-Technical Events Registration is Available Offline</h3>
-        <p>Please visit the registration desk for non-technical event sign-ups.</p>
-      </div>
+
     </div>
   );
 }
