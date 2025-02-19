@@ -64,7 +64,7 @@ function App() {
       <p className="caption">You can participate in all the technical events.</p>
       <div className="offline-registration">
         <h3>Non-Technical Events Registration is Available Offline</h3>
-        <p>The Registration only for Technical events</p>
+        <p>The Registration only for Technical events </p>
       </div>
       <form className="registration-form" onSubmit={handleSubmit}>
         <div className="form-group">
