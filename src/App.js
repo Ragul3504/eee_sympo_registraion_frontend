@@ -67,7 +67,7 @@ function App() {
         <p>The Registration only for Technical events </p>
     <h3>Event Instructions</h3>
 <p>Solo Payment: Pay ₹300 and participate in all events.</p>
-<p> Team Payment (PPT, Project Expo): Pay ₹300 per team. Participate in either PPT or Project Expo only.
+<p> Team Payment (PPT, Project Expo): Pay ₹300 per team. Participate in either PPT or Project Expo only.</p>
 <p> PPT: 2-3 members | Project Expo: 2-4 members.</p>
       </div>
       <form className="registration-form" onSubmit={handleSubmit}>
