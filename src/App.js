@@ -66,6 +66,11 @@ function App() {
         <h3>Non-Technical Events Registration is Available Offline</h3>
         <p>The Registration only for Technical events </p>
       </div>
+     <div className="event-instructions">
+        <h3>Event Instructions</h3>
+        <p>Solo Payment: Pay ₹300 and participate in all events.</p>
+        <p>Team Payment (PPT, Project Expo): Pay ₹300 per Team.Participate Either PPT or Project Expo Only. PPT allows 2-3 members, Project Expo allows 2-4 members.</p>
+      </div>
       <form className="registration-form" onSubmit={handleSubmit}>
         <div className="form-group">
           <label>Name: <User className="icon" /></label>
