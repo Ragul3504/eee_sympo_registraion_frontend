@@ -66,7 +66,8 @@ function App() {
         <h3>Non-Technical Events Registration is Available Offline</h3>
         <p>The Registration only for Technical events </p>
     <h3>Event Instructions</h3>
-     <p> Pay Rs.300/- Participate in all tech events</p>
+     <p>If You Pay Rs.300/- Participate in all tech events(individual)</p>
+    <p>OR</p>
     <p> Team Payment (PPT, Project Expo): Pay ₹300 per team. Participate in either PPT or Project Expo only.</p>
     <p> PPT: 2-3 members | Project Expo: 2-4 members.</p>
       </div>
